@@ -1,3 +1,11 @@
+turtlebot-indicator-groovy (0.0.5~1.gbp8ee7ae) UNRELEASED; urgency=low
+
+  ** SNAPSHOT build @8ee7ae4645942fe42996ef996f3342c7f8f81d89 **
+
+  * Fixed "Running as" menu item
+
+ -- I Heart Engineering <code@iheartengineering.com>  Fri, 01 Feb 2013 06:15:35 -0500
+
 turtlebot-indicator-groovy (0.0.5~1.gbp88dcb1) UNRELEASED; urgency=low
 
   ** SNAPSHOT build @88dcb1cff05215a1663895791e32186ff3378168 **

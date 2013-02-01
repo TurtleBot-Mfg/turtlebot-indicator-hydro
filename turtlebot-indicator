@@ -49,6 +49,7 @@ class TurtleBotIndicator:
         self._exit = False
         self._menu = gtk.Menu()
         self._menuitem = None
+        self._autoitem = None
         self._runasitem = None
         self._sepitem = None
         self._ros_pid = None
@@ -171,6 +172,16 @@ class TurtleBotIndicator:
                     self._master_update = True
             #self._nodes = list(set(self._pubs.values() + self._subs.values()))
 
+    def menuitem_autostart (self,item):
+        if (self._autoitem.get_active()):
+            print "Enabling Autostart"
+            p = subprocess.Popen(["gksudo rm /etc/init/ros.override" ], shell=True, stdout=None)
+            p.wait()
+        else:
+            print "Disable Autostart"
+            p = subprocess.Popen(["gksudo -- bash -c \"echo 'manual' >> /etc/init/ros.override\"" ], shell=True, stdout=None)
+            p.wait()
+
     def menuitem_shutdown (self,item):
         if (self._action is not self._SHUTDOWN):
             self._lastaction = time.time()
@@ -191,12 +202,22 @@ class TurtleBotIndicator:
         if self._ind.get_menu() == None:
             self._menu = gtk.Menu()
             self._menu.set_double_buffered(True)
+            if self._autoitem == None:
+                self._autoitem = gtk.CheckMenuItem()
+                self._autoitem.set_label("Automatically start ROS")
+                if (os.path.exists("/etc/init/ros.override")):
+                    self._autoitem.set_active(False);
+                else:
+                    self._autoitem.set_active(True);
+                self._autoitem.connect("toggled",self.menuitem_autostart)
+                self._menu.append(self._autoitem)
+                self._autoitem.show()
             if self._runasitem == None:
                 self._runasitem = gtk.MenuItem()
-            self._menu.append(self._runasitem)
+                self._menu.append(self._runasitem)
             if self._sepitem == None:
                 self._sepitem = gtk.SeparatorMenuItem()
-            self._menu.append(self._sepitem)
+                self._menu.append(self._sepitem)
             if self._menuitem == None:
                 self._menuitem = gtk.MenuItem()
             self._menu.append(self._menuitem)
