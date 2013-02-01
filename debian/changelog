@@ -1,3 +1,11 @@
+turtlebot-indicator-groovy (0.0.5~1.gbp88dcb1) UNRELEASED; urgency=low
+
+  ** SNAPSHOT build @88dcb1cff05215a1663895791e32186ff3378168 **
+
+  * Fixing PID detect and initctl
+
+ -- I Heart Engineering <code@iheartengineering.com>  Fri, 01 Feb 2013 04:53:01 -0500
+
 turtlebot-indicator-groovy (0.0.5~1.gbp644d1b) UNRELEASED; urgency=low
 
   ** SNAPSHOT build @644d1b49559e8842a3281a6bf47e48e9c5fbfeca **
