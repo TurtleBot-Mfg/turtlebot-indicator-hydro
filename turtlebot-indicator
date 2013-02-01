@@ -48,6 +48,8 @@ class TurtleBotIndicator:
         self._exit = False
         self._menu = gtk.Menu()
         self._menuitem = None
+        self._runasitem = None
+        self._sepitem = None
         self._IDLE = 0
         self._SHUTDOWN = 1
         self._STARTUP = 2
@@ -139,7 +141,7 @@ class TurtleBotIndicator:
             if self._master_update:
                 self._turtlebot_online = False
             for node in self._nodes:
-                if not self._turtlebot_online and node == "/turtlebot_node":
+                if not self._turtlebot_online and node == "/mobile_base":
                     self._turtlebot_online = True
                     self._master_update = True
             #self._nodes = list(set(self._pubs.values() + self._subs.values()))
@@ -164,6 +166,12 @@ class TurtleBotIndicator:
         if self._ind.get_menu() == None:
             self._menu = gtk.Menu()
             self._menu.set_double_buffered(True)
+            if self._runasitem == None:
+                self._runasitem = gtk.MenuItem()
+            self._menu.append(self._runasitem)
+            if self._sepitem == None:
+                self._sepitem = gtk.SeparatorMenuItem()
+            self._menu.append(self._sepitem)
             if self._menuitem == None:
                 self._menuitem = gtk.MenuItem()
             self._menu.append(self._menuitem)
@@ -176,13 +184,21 @@ class TurtleBotIndicator:
                 self._menuitem.set_label("Starting TurtleBot")
                 self._menuitem.set_sensitive(False)
                 self._menuitem.show()
+                self._runasitem.hide()
+                self._sepitem.hide()
             elif self._action == self._SHUTDOWN:
                 self._menuitem.set_label("Stopping TurtleBot")
                 self._menuitem.set_sensitive(False)
                 self._menuitem.show()
+                self._runasitem.hide()
+                self._sepitem.hide()
             elif self._turtlebot_online:
                 #self._menu = gtk.Menu()
                 self._ind.set_icon ("turtlebot-panel")
+                self._runasitem.set_label("Run as ")
+                self._runasitem.set_sensitive(False)
+                self._runasitem.show()
+                self._sepitem.show()
                 self._menuitem.set_label("Stop TurtleBot")
                 self._menuitem.set_sensitive(True)
                 self._menuitem.show()
@@ -196,6 +212,8 @@ class TurtleBotIndicator:
                 self._menuitem.set_label("Start TurtleBot")
                 self._menuitem.set_sensitive(True)
                 self._menuitem.show()
+                self._runasitem.hide()
+                self._sepitem.hide()
                 if self._menucid:
                     self._menuitem.disconnect(self._menucid)
                 self._menucid = self._menuitem.connect("activate",self.menuitem_startup)
@@ -205,6 +223,8 @@ class TurtleBotIndicator:
             self._menuitem.set_label("disconnected")
             self._menuitem.set_sensitive(False)
             self._menuitem.show()
+            self._runasitem.hide()
+            self._sepitem.hide()
         self._master_update = False
 
     def run(self):
