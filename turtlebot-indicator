@@ -50,6 +50,8 @@ class TurtleBotIndicator:
         self._menuitem = None
         self._runasitem = None
         self._sepitem = None
+        self._ros_user = None
+        self._ros_pid = None
         self._IDLE = 0
         self._SHUTDOWN = 1
         self._STARTUP = 2
@@ -72,6 +74,17 @@ class TurtleBotIndicator:
             self._action = self._IDLE
         p = subprocess.Popen(['ros-network','interface'], stdout=subprocess.PIPE)
         output = p.communicate()[0].strip()
+        p.wait()
+
+#    if ! [ -z $ROSCORE_PID ]; then
+#        ROSCORE_USER=`ps -p $ROSCORE_PID --no-headers -o user`
+#    fi
+
+        p = subprocess.Popen(['pgrep','-f "roslaunch.*core"'], stdout=subprocess.PIPE)
+        if p.returncode == 0:
+            self._ros_pid = p.communicate()[0].strip()
+        else:
+            self._ros_pid = None
         p.wait()
         if output != "lo":
             if not self._network_online:
@@ -151,7 +164,7 @@ class TurtleBotIndicator:
             self._lastaction = time.time()
             self._action = self._SHUTDOWN
             self._master_update = True
-            p = subprocess.Popen(['gksudo', "initctl stop turtlebot" ], stdout=None)
+            p = subprocess.Popen(['gksudo', "initctl stop ros" ], stdout=None)
             p.wait()
 
     def menuitem_startup (self,item):
@@ -159,7 +172,7 @@ class TurtleBotIndicator:
             self._lastaction = time.time()
             self._action = self._STARTUP
             self._master_update = True
-            p = subprocess.Popen(['gksudo', "initctl start turtlebot" ], stdout=None)
+            p = subprocess.Popen(['gksudo', "initctl start ros" ], stdout=None)
             p.wait()
 
     def build_menu(self):
@@ -195,7 +208,7 @@ class TurtleBotIndicator:
             elif self._turtlebot_online:
                 #self._menu = gtk.Menu()
                 self._ind.set_icon ("turtlebot-panel")
-                self._runasitem.set_label("Run as ")
+                self._runasitem.set_label("Run as "+self._ros_pid)
                 self._runasitem.set_sensitive(False)
                 self._runasitem.show()
                 self._sepitem.show()

@@ -1,35 +1,16 @@
-turtlebot-indicator-groovy (0.0.3) precise; urgency=low
+turtlebot-indicator-groovy (0.0.5~1.gbp644d1b) UNRELEASED; urgency=low
 
-  * This fix should close #1
-  * debian/changelog
+  ** SNAPSHOT build @644d1b49559e8842a3281a6bf47e48e9c5fbfeca **
 
- -- I Heart Engineering <code@iheartengineering.com>  Wed, 15 Aug 2012 08:49:05 -0400
+  [ lucid ]
+  * UNRELEASED
 
-turtlebot-indicator-groovy (0.0.3~1.gbpcf4205) UNRELEASED; urgency=low
+  [ I Heart Engineering ]
 
-  ** SNAPSHOT build @cf4205be7e37cf86ef4ba8746a63c7d2077ed1a4 **
+ -- I Heart Engineering <code@iheartengineering.com>  Fri, 01 Feb 2013 04:26:02 -0500
 
-  * Stop -> Stopping -> Start -> Starting   fixes #1
+turtlebot-indicator-groovy (0.0.4) precise; urgency=low
 
- -- I Heart Engineering <code@iheartengineering.com>  Mon, 13 Aug 2012 10:20:03 -0400
-
-turtlebot-indicator-groovy (0.0.3~1.gbp3475a0) UNRELEASED; urgency=low
-
-  ** SNAPSHOT build @3475a0520add3e3d7689ba9edcdcd349eef357b2 **
-
-  * Added support for "Stopping" and "Starting" transitions
-
- -- I Heart Engineering <code@iheartengineering.com>  Mon, 13 Aug 2012 06:16:28 -0400
-
-turtlebot-indicator-groovy (0.0.2) precise; urgency=low
-
-  * Start/Stop/Disconnect works; State change requires gksudo
-
- -- I Heart Engineering <code@iheartengineering.com>  Thu, 26 Jul 2012 18:06:48 -0400
-
-turtlebot-indicator-groovy (0.0.1) precise; urgency=low
-
-  * Basic status working
-  * source package automatically created by stdeb 0.6.0+git
+  * Forked from fuerte
 
  -- I Heart Engineering <code@iheartengineering.com>  Sun, 22 Jul 2012 22:11:07 -0400
