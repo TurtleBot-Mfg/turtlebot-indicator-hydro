@@ -70,14 +70,18 @@ class TurtleBotIndicator:
         self._subs = {} # Subscribers keyed by topic
         self._lastaction = time.time()
         self._menucid = None
+        self._prog_network ='/usr/sbin/ros-network'
 
     def update(self):
         if (time.time()-self._lastaction) > 30:
             # After 30 seconds, give up on stoping/starting
             self._action = self._IDLE
-        p = subprocess.Popen(['ros-network','interface'], stdout=subprocess.PIPE)
-        p.wait()
-        output = p.communicate()[0].strip()
+        if os.access(self._prog_network, os.X_OK):
+            p = subprocess.Popen(['ros-network','interface'], stdout=subprocess.PIPE)
+            p.wait()
+            output = p.communicate()[0].strip()
+        else:
+            output = "lo"
 
         p = subprocess.Popen(["pgrep -f roslaunch.*core"], shell=True, universal_newlines=True, stdout=subprocess.PIPE)
         p.wait()
@@ -280,9 +284,13 @@ class TurtleBotIndicator:
     def run(self):
         self.update()
         if not self._exit:
-            source_id = gobject.timeout_add(500, self.run)
+            source_id = gobject.timeout_add(1000, self.run)
 
     def start(self):
+        if os.access(os.path.expanduser("~/.ros/turtlebot-indicator.runonce"), os.R_OK):
+            p = subprocess.Popen(["zenity --info --width=320 --height=240 --title=\"TurtleBot Setup\" --text=\"Initial Setup Tasks\n\n1) Configure the WiFi network\n2) By default ROS will autostart\n\nAdditional documentation can be found in the 'Get Started\!' guide on the desktop\""], shell=True, universal_newlines=True, stdout=subprocess.PIPE)
+            p.wait()
+            os.unlink(os.path.expanduser("~/.ros/turtlebot-indicator.runonce"))
         self.update()
         self.build_menu()
         self.run()

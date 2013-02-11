@@ -1,3 +1,31 @@
+turtlebot-indicator-groovy (0.0.6~1.gbp680389) UNRELEASED; urgency=low
+
+  ** SNAPSHOT build @6803891859661ac9e909dc469072f87152112b33 **
+
+  [ lucid ]
+  * UNRELEASED
+
+  [ I Heart Engineering ]
+
+ -- I Heart Engineering <code@iheartengineering.com>  Mon, 11 Feb 2013 01:08:15 -0500
+
+turtlebot-indicator-groovy (0.0.6~1.gbp680389) UNRELEASED; urgency=low
+
+  ** SNAPSHOT build @6803891859661ac9e909dc469072f87152112b33 **
+
+  [ lucid ]
+  * UNRELEASED
+
+  [ I Heart Engineering ]
+
+ -- I Heart Engineering <code@iheartengineering.com>  Mon, 11 Feb 2013 00:20:31 -0500
+
+turtlebot-indicator-groovy (0.0.5) precise; urgency=low
+
+  * Added support for Automatic startup control
+
+ -- I Heart Engineering <code@iheartengineering.com>  Fri, 01 Feb 2013 18:21:57 -0500
+
 turtlebot-indicator-groovy (0.0.5~1.gbp8ee7ae) UNRELEASED; urgency=low
 
   ** SNAPSHOT build @8ee7ae4645942fe42996ef996f3342c7f8f81d89 **
