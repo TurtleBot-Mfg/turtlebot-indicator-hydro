@@ -6,7 +6,7 @@ if os.path.exists("debian/changelog"):
     output=subprocess.check_output("parsechangelog | grep Version", shell=True)
     version = output.split(":")[1].strip()
 
-setup(name = "turtlebot-indicator-groovy",
+setup(name = "turtlebot-indicator-hydro",
     version = version,
     description = "TurtleBot Status Indicator",
     author = "I Heart Engineering",

@@ -7,7 +7,7 @@
 	dh $@ --with python2 --buildsystem=python_distutils
 
 override_dh_auto_install:
-	python setup.py install --root=debian/turtlebot-indicator-groovy --install-layout=deb --install-lib=/usr/share/turtlebot-indicator-groovy --install-scripts=/usr/share/turtlebot-indicator-groovy
+	python setup.py install --root=debian/turtlebot-indicator-hydro --install-layout=deb --install-lib=/usr/share/turtlebot-indicator-hydro --install-scripts=/usr/share/turtlebot-indicator-hydro
 override_dh_auto_build:
 
 
